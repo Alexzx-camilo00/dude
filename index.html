@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecaTurbo | Emagrecimento rápido em casa</title>
+    <style>
+      :root {
+        --bg: #07090f;
+        --card: #0f1421;
+        --primary: #ff4d67;
+        --primary-2: #ff7a50;
+        --text: #e9edf5;
+        --muted: #9fb1ce;
+        --accent: #6af0c4;
+        --border: #1d2333;
+        --glow: 0 20px 80px rgba(255, 92, 120, 0.18);
+        --radius: 18px;
+        font-family: "Inter", "SF Pro Display", "Segoe UI", system-ui, -apple-system,
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at 20% 20%, rgba(255, 77, 103, 0.12), transparent 28%),
+          radial-gradient(circle at 80% 10%, rgba(106, 240, 196, 0.12), transparent 30%),
+          linear-gradient(120deg, rgba(15, 20, 33, 0.8), rgba(7, 9, 15, 0.95));
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 22px 120px;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        padding: 26px 24px;
+        background: linear-gradient(135deg, rgba(255, 77, 103, 0.15), rgba(106, 240, 196, 0.06));
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: var(--glow);
+        border-radius: 22px;
+        margin-top: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 70% 20%, rgba(255, 122, 80, 0.18), transparent 36%);
+        pointer-events: none;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: rgba(255, 255, 255, 0.05);
+        width: fit-content;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 28px;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: clamp(32px, 4vw, 46px);
+        margin: 0;
+        line-height: 1.1;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        font-size: 18px;
+        margin: 14px 0 20px;
+        line-height: 1.6;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .cta {
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        color: #fff;
+        padding: 14px 22px;
+        border-radius: 12px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        box-shadow: var(--glow);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        font-size: 16px;
+      }
+
+      .cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px rgba(255, 122, 80, 0.24);
+      }
+
+      .ghost {
+        padding: 13px 16px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .price-tag {
+        display: grid;
+        gap: 6px;
+        background: rgba(7, 9, 15, 0.75);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px 14px;
+        width: fit-content;
+      }
+
+      .old {
+        color: var(--muted);
+        text-decoration: line-through;
+        font-size: 14px;
+      }
+
+      .new {
+        font-size: 30px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .timer {
+        color: var(--primary-2);
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+        pointer-events: none;
+      }
+
+      .section-title {
+        font-size: 26px;
+        margin: 0 0 12px;
+      }
+
+      .section-desc {
+        color: var(--muted);
+        margin: 0 0 18px;
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+
+      .pill {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: rgba(255, 122, 80, 0.14);
+        color: var(--primary);
+        font-weight: 800;
+      }
+
+      .testimonials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+      }
+
+      .quote {
+        font-size: 16px;
+        color: #dfe6f7;
+        line-height: 1.6;
+      }
+
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255, 77, 103, 0.7), rgba(106, 240, 196, 0.7));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .before-after {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+        align-items: center;
+      }
+
+      .before-after .card {
+        text-align: center;
+      }
+
+      .progress-bar {
+        background: rgba(255, 255, 255, 0.06);
+        height: 12px;
+        border-radius: 999px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .progress-bar span {
+        position: absolute;
+        inset: 0;
+        width: 78%;
+        background: linear-gradient(135deg, var(--accent), var(--primary-2));
+      }
+
+      .list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .faq {
+        display: grid;
+        gap: 12px;
+      }
+
+      .faq-item {
+        padding: 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .faq-item h4 {
+        margin: 0 0 8px;
+      }
+
+      .cta-section {
+        text-align: center;
+        padding: 32px;
+        background: linear-gradient(120deg, rgba(255, 77, 103, 0.2), rgba(106, 240, 196, 0.16));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 18px;
+        box-shadow: var(--glow);
+      }
+
+      footer {
+        margin-top: 60px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (max-width: 720px) {
+        .cta-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .cta,
+        .ghost {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="badge">🔥 Oferta relâmpago — somente hoje</div>
+        <div class="hero">
+          <div>
+            <h1>SecaTurbo: emagreça rápido em casa com um HUB completo e inteligente</h1>
+            <p class="subtitle">
+              100 receitas + treinos rápidos + monitoramento de peso + calculadoras + SecaTurbo AI
+              24/7. Tudo em um app PWA para você instalar no celular e começar agora.
+            </p>
+            <div class="cta-row">
+              <a class="cta" href="https://pay.cakto.com.br/9qv9mi4_651968" target="_blank"
+                >Quero entrar agora</a
+              >
+              <div class="price-tag">
+                <span class="old">De R$498</span>
+                <span class="new">Por R$39,99</span>
+                <span class="timer">Oferta por tempo limitado</span>
+              </div>
+              <div class="ghost">Instale como app e use offline</div>
+            </div>
+            <div class="badge-row" style="margin-top: 16px">
+              <span class="pill"><span class="icon">✓</span>Sem academia</span>
+              <span class="pill"><span class="icon">⚡</span>Resultados em semanas</span>
+              <span class="pill"><span class="icon">💬</span>Suporte com IA 24/7</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="margin-top: 0">Seu painel dentro do SecaTurbo</h3>
+            <p class="section-desc" style="margin-top: 6px">
+              Peso inicial, atual e meta, barra de evolução, notificações internas e respostas instantâneas da SecaTurbo AI para manter você no ritmo.
+            </p>
+            <div class="progress-bar" aria-label="Progresso simulado"><span></span></div>
+            <div class="list" style="margin-top: 14px">
+              <div class="pill"><span class="icon">🍽</span>100 receitas aceleradoras</div>
+              <div class="pill"><span class="icon">🏋️</span>Treinos em casa de 10-15 min</div>
+              <div class="pill"><span class="icon">📈</span>Monitoramento diário</div>
+              <div class="pill"><span class="icon">🤖</span>SecaTurbo AI como treinador</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section style="margin-top: 38px">
+        <h2 class="section-title">Por que funciona tão rápido?</h2>
+        <p class="section-desc">
+          O SecaTurbo combina estratégia nutricional, movimento curto de alta eficiência e acompanhamento inteligente. Tudo é entregue em um app que se adapta ao seu ritmo e remove as barreiras que travam a execução.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <div class="icon">⏱</div>
+            <h3>Treinos de 10-15 minutos</h3>
+            <p class="section-desc">HIIT e funcionais curtos, sem equipamentos, que aceleram o metabolismo por horas.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🍲</div>
+            <h3>Receitas prontas</h3>
+            <p class="section-desc">Planos simples de montar, com ingredientes acessíveis e foco em saciedade.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🤖</div>
+            <h3>IA que te guia</h3>
+            <p class="section-desc">Pergunte qualquer coisa e receba ajustes personalizados instantaneamente.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔔</div>
+            <h3>Notificações inteligentes</h3>
+            <p class="section-desc">Lembretes internos para água, treino e refeição na hora certa.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">Benefícios imediatos</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Metabolismo acelerado</h3>
+            <p class="section-desc">Protocolos curtos elevam o gasto calórico diário sem exaustão.</p>
+          </div>
+          <div class="card">
+            <h3>Disciplina assistida</h3>
+            <p class="section-desc">Notificações + IA = você não esquece e não perde o foco.</p>
+          </div>
+          <div class="card">
+            <h3>Autonomia total</h3>
+            <p class="section-desc">Tudo acontece no app: receitas, treino, métricas e ajustes.</p>
+          </div>
+          <div class="card">
+            <h3>Evolução visível</h3>
+            <p class="section-desc">Gráficos e barras de progresso mostram o impacto real a cada semana.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">Antes e depois (exemplo realista)</h2>
+        <div class="before-after">
+          <div class="card">
+            <h3>Antes</h3>
+            <p class="section-desc">72kg · rotina sedentária · baixa energia</p>
+            <div class="progress-bar"><span style="width: 28%"></span></div>
+          </div>
+          <div class="card">
+            <h3>Depois de 6 semanas</h3>
+            <p class="section-desc">64kg · treinos em casa · energia alta e confiança renovada</p>
+            <div class="progress-bar"><span style="width: 82%"></span></div>
+          </div>
+          <div class="card">
+            <h3>O que mudou</h3>
+            <p class="section-desc">Calorias controladas, treinos consistentes, hidratação em dia e IA ajustando o plano em tempo real.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">Depoimentos</h2>
+        <div class="testimonials">
+          <div class="card">
+            <p class="quote">“Eu só tinha 20 minutos por dia. Em 4 semanas perdi 5kg porque o app me dizia exatamente o que fazer.”</p>
+            <div class="person">
+              <div class="avatar">A</div>
+              <div>
+                <strong>Amanda, 32</strong>
+                <div style="color: var(--muted)">Trabalha de casa</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="quote">“As receitas são simples e a SecaTurbo AI responde na hora quando quero trocar algum ingrediente.”</p>
+            <div class="person">
+              <div class="avatar">R</div>
+              <div>
+                <strong>Rafael, 28</strong>
+                <div style="color: var(--muted)">Perdeu 7kg em 5 semanas</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="quote">“O painel de progresso virou minha motivação diária. Ver a barra subir toda semana é viciante.”</p>
+            <div class="person">
+              <div class="avatar">L</div>
+              <div>
+                <strong>Laura, 35</strong>
+                <div style="color: var(--muted)">Mãe de 2 filhos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">O que você vai receber</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>100 receitas aceleradoras</h3>
+            <p class="section-desc">Cardápios rápidos, com lista de compras e substituições.</p>
+          </div>
+          <div class="card">
+            <h3>Treinos guiados sem equipamento</h3>
+            <p class="section-desc">Vídeos curtos, contagem automática e aquecimento rápido.</p>
+          </div>
+          <div class="card">
+            <h3>Calculadoras IMC, TMB e água</h3>
+            <p class="section-desc">Descubra seus números e veja recomendações personalizadas.</p>
+          </div>
+          <div class="card">
+            <h3>Painel de progresso completo</h3>
+            <p class="section-desc">Peso inicial, atual e meta com percentuais e curvas de evolução.</p>
+          </div>
+          <div class="card">
+            <h3>SecaTurbo AI 24/7</h3>
+            <p class="section-desc">Respostas instantâneas para dúvidas, ajustes e motivação.</p>
+          </div>
+          <div class="card">
+            <h3>Notificações e lembretes</h3>
+            <p class="section-desc">Alertas para refeições, água, treino e checagens semanais.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">Como funciona</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="icon">1</div>
+            <h3>Instale o PWA</h3>
+            <p class="section-desc">Acesse o link, instale no celular e tenha o app como ícone na tela inicial.</p>
+          </div>
+          <div class="card">
+            <div class="icon">2</div>
+            <h3>Defina meta e nível</h3>
+            <p class="section-desc">Informe peso, objetivo e tempo. O app monta o plano base automaticamente.</p>
+          </div>
+          <div class="card">
+            <div class="icon">3</div>
+            <h3>Acompanhe e ajuste</h3>
+            <p class="section-desc">Use a IA para adaptar treinos e refeições conforme sua rotina diária.</p>
+          </div>
+          <div class="card">
+            <div class="icon">4</div>
+            <h3>Veja o progresso</h3>
+            <p class="section-desc">Registre peso e fotos, visualize percentuais e receba lembretes estratégicos.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">Para quem é o SecaTurbo</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Quem quer resultados sem academia</h3>
+            <p class="section-desc">Treinos curtos no conforto de casa, sem equipamentos.</p>
+          </div>
+          <div class="card">
+            <h3>Agenda apertada</h3>
+            <p class="section-desc">Protocolos de 10-15 minutos que cabem na sua rotina.</p>
+          </div>
+          <div class="card">
+            <h3>Precisa de direcionamento</h3>
+            <p class="section-desc">IA responde na hora o que comer, como adaptar e quando treinar.</p>
+          </div>
+          <div class="card">
+            <h3>Busca acompanhamento simples</h3>
+            <p class="section-desc">Monitore peso, água e calorias sem planilhas complicadas.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">Sobre o SecaTurbo AI</h2>
+        <div class="card">
+          <p class="section-desc">
+            A SecaTurbo AI, empoderada pelo ChatGPT, atua como seu treinador pessoal 24/7: ajusta treinos, sugere substituições de alimentos, responde dúvidas de segurança e envia mensagens motivacionais. Quanto mais você usa, mais preciso o acompanhamento fica.
+          </p>
+          <div class="badge-row">
+            <span class="pill"><span class="icon">⚙️</span>Planejamento automático</span>
+            <span class="pill"><span class="icon">🧠</span>Contexto do seu histórico</span>
+            <span class="pill"><span class="icon">🚀</span>Respostas em segundos</span>
+            <span class="pill"><span class="icon">💡</span>Dicas personalizadas</span>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px" class="cta-section">
+        <h2 class="section-title">Oferta exclusiva de lançamento</h2>
+        <p class="section-desc" style="color: #fff">De R$498 por apenas R$39,99 hoje.</p>
+        <a class="cta" href="https://pay.cakto.com.br/9qv9mi4_651968" target="_blank">Garantir minha vaga</a>
+        <p style="color: var(--muted); margin-top: 10px">Acesso imediato + atualizações futuras inclusas.</p>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">Garantia incondicional de 7 dias</h2>
+        <div class="card">
+          <p class="section-desc">
+            Teste o SecaTurbo por 7 dias. Se não sentir que está no caminho certo, peça o reembolso e devolvemos 100% do valor. Sem perguntas.
+          </p>
+          <div class="badge-row">
+            <span class="pill"><span class="icon">🛡</span>Risco zero</span>
+            <span class="pill"><span class="icon">🔁</span>Reembolso simples</span>
+            <span class="pill"><span class="icon">⚡</span>Acesso imediato</span>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 42px">
+        <h2 class="section-title">Perguntas frequentes</h2>
+        <div class="faq">
+          <div class="faq-item">
+            <h4>Preciso de equipamentos?</h4>
+            <p class="section-desc">Não. Todos os treinos são feitos com o peso do próprio corpo.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Funciona em qualquer celular?</h4>
+            <p class="section-desc">Sim. O SecaTurbo é um PWA e roda no navegador. Você pode instalar como aplicativo.</p>
+          </div>
+          <div class="faq-item">
+            <h4>E se eu tiver restrições alimentares?</h4>
+            <p class="section-desc">Use a SecaTurbo AI para solicitar substituições e receitas compatíveis com sua necessidade.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Em quanto tempo vejo resultados?</h4>
+            <p class="section-desc">Alunos relatam redução visível entre 3 e 6 semanas seguindo o protocolo diário.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Tem suporte humano?</h4>
+            <p class="section-desc">A IA cobre 24/7 e nossa equipe monitora para garantir respostas seguras e confiáveis.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 52px" class="cta-section">
+        <h2 class="section-title">Pronto para acelerar seu emagrecimento?</h2>
+        <p class="section-desc" style="color: #fff; margin-bottom: 18px">
+          Entre agora por R$39,99, instale o app no celular e receba o plano completo em segundos.
+        </p>
+        <div class="cta-row" style="justify-content: center">
+          <a class="cta" href="https://pay.cakto.com.br/9qv9mi4_651968" target="_blank">Comprar agora</a>
+          <div class="price-tag">
+            <span class="old">De R$498</span>
+            <span class="new">Por R$39,99</span>
+            <span class="timer">Garantia de 7 dias incluída</span>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        SecaTurbo · Resultados rápidos e seguros em casa · Oferta limitada
+      </footer>
+    </div>
+  </body>
+</html>
